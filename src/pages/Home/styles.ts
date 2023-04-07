@@ -96,14 +96,6 @@ export const FirstItem = styled.div`
             }
                 
         }
-
-        /* span::before {
-            content: "";
-            display: inline-block;
-            vertical-align: middle;
-            background-image: url("../assets/Icon.png");
-            background-size: cover;
-        } */
     }
     
 `

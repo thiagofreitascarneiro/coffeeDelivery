@@ -8,6 +8,8 @@ export const CheckoutContainer = styled.div`
 
 export const ServicersContainer = styled.div`
     display: flex;
+    justify-content: center;
+    margin-top: 40px;
 `
 
 export const Title = styled.h2`
@@ -19,12 +21,13 @@ export const Title = styled.h2`
     display: flex;
     align-items: center;
     color: ${(props) => props.theme['base-subtitle']};
-   margin-bottom: 15px;
+    margin-bottom: 15px;
 
 `
 
 export const ProductSelected = styled.div`
     display: flex;
     flex-direction: column;
+    margin-right: 32px;
 
 `

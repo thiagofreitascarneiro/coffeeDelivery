@@ -11,13 +11,15 @@ export function Checkout() {
             <ServicersContainer>
                 
                 <ProductSelected>
-                <Title>Complete seu pedido</Title>
-                    <FormRegister />
+                    <Title>Complete seu pedido</Title>
+                        <FormRegister />
                 </ProductSelected>
+
                 <ProductSelected>
-                <Title>Cafés selecionados</Title>
-                    <Cart />
+                    <Title>Cafés selecionados</Title>
+                        <Cart />
                 </ProductSelected>
+
             </ServicersContainer>
        </CheckoutContainer> 
     )

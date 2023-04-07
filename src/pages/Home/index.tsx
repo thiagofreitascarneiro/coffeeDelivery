@@ -1,12 +1,12 @@
 import { Header } from "../../components/Header";
 import { AdvertisingContainer, CoffeeAdvertising, CoffeeContainer, CoffeeProduct, FirstItem, HomeContainer, Items, SecondItem, StyledImage, Subtitle } from "./styles";
 import coffee from '../../assets/coffee.png';
-import Icon from '../../assets/icon.png';
-import Icon1 from '../../assets/icon-1.png';
-import Icon2 from '../../assets/icon-2.png';
-import Icon3 from '../../assets/icon-3.png';
-import Vector from '../../assets/vector.png';
-import Vector2 from '../../assets/vector2.png';
+import Icon from '../../assets/Icon.png';
+import Icon1 from '../../assets/Icon-1.png';
+import Icon2 from '../../assets/Icon-2.png';
+import Icon3 from '../../assets/Icon-3.png';
+import Vector from '../../assets/Vector.png';
+import Vector2 from '../../assets/Vector2.png';
 import { CardCoffee } from "../../components/CardCoffee";
 import {coffees} from "../../data/coffees";
 
@@ -27,14 +27,17 @@ export function Home() {
             <CoffeeAdvertising>
                 <AdvertisingContainer>
                     <h1>Encontre o café perfeito <br/> para qualquer hora do dia</h1>
-                    <StyledImage src={Vector} alt=""/>
-                    <Subtitle>
+                   
                     <StyledImage src={Vector2} alt=""/>
+                    <Subtitle>
+                    
                         Com o Coffee Delivery você recebe seu café onde estiver, a <br />
                         qualquer hora
+                        
                     </Subtitle>
-                    <Items>
-                    <StyledImage src={Vector2} alt=""/>
+
+                    <Items>    
+                                        
                         <FirstItem>
                             <p>
                             <span >
@@ -52,8 +55,10 @@ export function Home() {
                             
                         </FirstItem>
                         <SecondItem>
-                        <StyledImage src={Vector} alt=""/>
+                        
                         <StyledImage src={Vector2} alt=""/>
+                        <StyledImage src={Vector} alt=""/>
+                        
                             <p>
                             <span >
                                 <img src={Icon1} alt=""/>
@@ -69,7 +74,7 @@ export function Home() {
                             </p>
                             
                         </SecondItem>
-                        
+                    
                     </Items>
                 </AdvertisingContainer>
                
@@ -77,7 +82,7 @@ export function Home() {
                     <source srcSet={coffee} type="imagem café" />
                     <StyledImage src={Vector2} alt=""/>
                     <StyledImage src={Vector} alt=""/>
-                    <StyledImage src={Vector2} alt=""/>
+                   
                     <img src={coffee} alt="Café" title="imagem propaganda café"/>
                 </picture>
                 
