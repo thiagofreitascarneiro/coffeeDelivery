@@ -27,7 +27,9 @@ export function Cart() {
                     <p>R$ 9,90</p>
                 </CoffeePrice>
             </CoffeeSlected>
+
             <Line />
+
             <WrapperDelivery>
                 <TotalItems>
                     <p>total de itens</p>
@@ -45,6 +47,7 @@ export function Cart() {
                     Confirmar Pedido
                 </ButtonConfirm>
             </WrapperDelivery>
+            
         </ContainerCart>
     )
 }
