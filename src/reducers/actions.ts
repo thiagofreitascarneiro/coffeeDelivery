@@ -16,8 +16,7 @@ export enum ActionTypes {
 export const addToCart = (item: Cycle) => {
   return {
     type: ActionTypes.ADD_NEW_CYCLE,
-    payload: {
-        item,
-    }
+    payload: item,
+
   }
 };

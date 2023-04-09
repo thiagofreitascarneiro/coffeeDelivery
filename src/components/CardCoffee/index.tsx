@@ -22,7 +22,7 @@ export interface ICoffeeSelected {
 
 export function CardCoffee({content}: ICoffeeList ) {
 
-    const [state, dispatch] = useReducer(globalReducer, initialState);
+    const [cartListProduct, dispatch] = useReducer(globalReducer, initialState);
 
 
     function selectedCoffeeToCart() {

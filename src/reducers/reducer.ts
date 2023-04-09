@@ -7,6 +7,7 @@ export interface State {
 
 export const initialState: State = {
   cartListProduct: [],
+  
 };
 
 export const globalReducer = (state = initialState, action: any) => {

@@ -5,14 +5,17 @@ import { GlobalStyle } from './styles/themes/global'
 
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
+import { AppProvider  } from './contexts/CyclesContexts'
 
 export function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-      
+      <AppProvider>
         <Router  />
+      </AppProvider >
+      
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
