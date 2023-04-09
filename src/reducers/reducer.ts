@@ -1,26 +1,25 @@
 import {ActionTypes } from "./actions";
+import {Cycle} from "./actions"
 
-
-export interface Cycle {
-    id: number;
-    name: string;
-    photo: string;
-    price: number,
-    quantity?: number;
+export interface State {
+  cartListProduct: Cycle[];
 }
 
-export const initialState = {
-  myList: []
+export const initialState: State = {
+  cartListProduct: [],
 };
 
 export const globalReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ActionTypes.ADD_NEW_CYCLE:
-      return {
+      return {       
         ...state,
-        myList: [...state.myList, action.payload]
+        cartListProduct: [...state.cartListProduct, action.payload],
+        
       };
+      
     default:
       return state;
   }
+  
 };
