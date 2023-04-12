@@ -22,7 +22,7 @@ export interface ICoffeeSelected {
 
 export function CardCoffee({content}: ICoffeeList ) {
 
-    const [cartListProduct, dispatch] = useReducer(globalReducer, initialState);
+    const [state, dispatch] = useReducer(globalReducer, initialState);
 
 
     function selectedCoffeeToCart() {
@@ -33,12 +33,13 @@ export function CardCoffee({content}: ICoffeeList ) {
             price: content.price,
             quantity: 1 
         };
+         state.cartListProduct.push(newItem)
         dispatch(addToCart(newItem));
     }
     
 
     useEffect(() => {
-        
+        console.log(state.cartListProduct)
     }, [selectedCoffeeToCart])
 
     return (

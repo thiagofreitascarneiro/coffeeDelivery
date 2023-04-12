@@ -10,10 +10,10 @@ const initialState: State = {
   cartListProduct: [],
 };
 
-type Props = {
-  children?: React.ReactNode;
+export type MyObject = {
+  id: number;
+  name: string;
 };
-
 interface CyclesContextProviderProps {
   children: ReactNode;
 }
