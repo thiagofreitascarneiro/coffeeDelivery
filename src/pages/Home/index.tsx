@@ -9,6 +9,8 @@ import Vector from '../../assets/Vector.png';
 import Vector2 from '../../assets/Vector2.png';
 import { CardCoffee } from "../../components/CardCoffee";
 import {coffees} from "../../data/coffees";
+import { AppContext } from "../../contexts/CyclesContexts";
+import { useContext, useEffect } from "react";
 
 export interface ICoffess {
     id: number;
@@ -21,19 +23,25 @@ export interface ICoffess {
 
 export function Home() {
 
+    const { state } = useContext(AppContext);
+
+    useEffect(() => {
+        console.log(state.cartListProduct.length)
+    },[state])
+
     return (
         <HomeContainer>
             <Header />
             <CoffeeAdvertising>
                 <AdvertisingContainer>
                     <h1>Encontre o café perfeito <br/> para qualquer hora do dia</h1>
-                   
+                            
                     <StyledImage src={Vector2} alt=""/>
                     <Subtitle>
                     
                         Com o Coffee Delivery você recebe seu café onde estiver, a <br />
                         qualquer hora
-                        
+                            {state.cartListProduct.length}
                     </Subtitle>
 
                     <Items>    

@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
     align-items: center;
     padding: 32px 160px;
     height: 104px;
-    background: ${(props) => props.theme.background}
+    background: ${(props) => props.theme.background};
 
 `
 
@@ -54,4 +54,5 @@ export const Cart = styled.div`
     height: 38px;
     background: ${(props) => props.theme['yellow-light']};
     border-radius: 6px;
+    cursor: pointer;
 `

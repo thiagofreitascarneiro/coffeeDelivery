@@ -11,6 +11,7 @@ export const initialState: State = {
 };
 
 export const globalReducer = (state = initialState, action: any) => {
+  console.log(state);
   switch (action.type) {
     case ActionTypes.ADD_NEW_CYCLE:
       return {       

@@ -35,12 +35,8 @@ export function CardCoffee({content}: ICoffeeList ) {
         };
          state.cartListProduct.push(newItem)
         dispatch(addToCart(newItem));
-    }
-    
-
-    useEffect(() => {
         console.log(state.cartListProduct)
-    }, [selectedCoffeeToCart])
+    }
 
     return (
         

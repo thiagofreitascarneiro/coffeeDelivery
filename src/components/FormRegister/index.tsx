@@ -1,7 +1,21 @@
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
-import { DeliveryAddress, Form, FormAdress, Input, InputDiv, Order, Payment, PaymentForm, PaymentMethod, ProductService, Subtitle, Title } from "./styles";
+import { DeliveryAddress, 
+            Form, 
+            FormAdress, 
+            Input, 
+            InputDiv, 
+            Order, 
+            Payment, 
+            PaymentForm, 
+            PaymentMethod, 
+            ProductService, 
+            Subtitle, 
+            Title } from "./styles";
+
+
 
 export function FormRegister() {
+    
     return (
         <ProductService>    
             <Order>

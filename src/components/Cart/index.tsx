@@ -1,8 +1,11 @@
 import { ButtonConfirm, ButtonRemove, CoffeePrice, CoffeeSlected , ContainerButton, ContainerCart, DecreaseButton, IncreaseButton, Line, Picture, PriceDelivery, QuantityButton, TotalCart, TotalItems, WrapperButton, WrapperDelivery } from "./styles";
 import  americano  from '../../../public/americano.png'
 import { Trash } from "phosphor-react";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../contexts/CyclesContexts";
 
 export function Cart() {
+
     return (
         <ContainerCart>
             <CoffeeSlected>
