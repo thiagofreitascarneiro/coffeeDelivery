@@ -10,7 +10,8 @@ import Vector2 from '../../assets/Vector2.png';
 import { CardCoffee } from "../../components/CardCoffee";
 import {coffees} from "../../data/coffees";
 import { AppContext } from "../../contexts/CyclesContexts";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useReducer } from "react";
+import { globalReducer, initialState } from "../../reducers/reducer";
 
 export interface ICoffess {
     id: number;
@@ -23,7 +24,7 @@ export interface ICoffess {
 
 export function Home() {
 
-    const { state } = useContext(AppContext);
+    const [state] = useReducer(globalReducer, initialState);
 
     useEffect(() => {
         console.log(state.cartListProduct.length)
@@ -41,8 +42,16 @@ export function Home() {
                     
                         Com o Coffee Delivery você recebe seu café onde estiver, a <br />
                         qualquer hora
-                            {state.cartListProduct.length}
+                        
                     </Subtitle>
+
+                    <ul>
+                            {state.cartListProduct.map((product) => (
+                            <li key={product.id}>
+                                {product.name} - R${product.price}
+                            </li>
+                            ))}
+                    </ul>
 
                     <Items>    
                                         
