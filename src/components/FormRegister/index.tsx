@@ -11,10 +11,31 @@ import { DeliveryAddress,
             ProductService, 
             Subtitle, 
             Title } from "./styles";
+import { useState } from "react";
 
 
 
 export function FormRegister() {
+
+    const [payment1Clicked, setPayment1Clicked] = useState(false);
+    const [payment2Clicked, setPayment2Clicked] = useState(false);
+    const [payment3Clicked, setPayment3Clicked] = useState(false);
+
+    function handleClickPayment1() {
+        setPayment1Clicked(true);
+        setPayment2Clicked(false);
+        setPayment3Clicked(false);
+    }
+    function handleClickPayment2() {
+        setPayment1Clicked(false);
+        setPayment2Clicked(true);
+        setPayment3Clicked(false);
+    }
+    function handleClickPayment3() {
+        setPayment1Clicked(false);
+        setPayment2Clicked(false);
+        setPayment3Clicked(true);
+    }
     
     return (
         <ProductService>    
@@ -68,15 +89,15 @@ export function FormRegister() {
                     a forma que deseja pagar
                 </Subtitle>
                 <PaymentForm>
-                    <PaymentMethod>
+                    <PaymentMethod onClick={handleClickPayment1} isClicked={payment1Clicked}>
                         <CreditCard size={20} color="#8047F8" />
                         <p>cartão de crédito</p>
                     </PaymentMethod>
-                    <PaymentMethod>
+                    <PaymentMethod onClick={handleClickPayment2} isClicked={payment2Clicked}>
                         <Bank size={20} color="#8047F8" />
                         <p>cartão de débito</p>
                     </PaymentMethod>
-                    <PaymentMethod>
+                    <PaymentMethod onClick={handleClickPayment3} isClicked={payment3Clicked}>
                         <Money size={20} color="#8047F8" />
                         <p>Dinheiro</p>
                     </PaymentMethod>

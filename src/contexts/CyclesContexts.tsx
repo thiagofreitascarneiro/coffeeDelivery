@@ -1,34 +1,25 @@
 import { ReactNode, createContext, useContext, useReducer } from "react";
-import { State, globalReducer } from "../reducers/reducer";
+import { State, globalReducer, initialState } from "../reducers/reducer";
 
 interface ContextProps {
     state: State;
     dispatch: React.Dispatch<any>;
   }
 
-const initialState: State = {
-  cartListProduct: [],
-};
-
-export type MyObject = {
-  id: number;
-  name: string;
-};
 interface CyclesContextProviderProps {
   children: ReactNode;
 }
 
 export const AppContext = createContext<ContextProps>({
   state: initialState,
-  dispatch: () => null,
+  dispatch: () => [],
 });
 
-
-export function AppProvider({ 
-  children 
-}:  CyclesContextProviderProps) {
+export function AppProvider({ children}: CyclesContextProviderProps) {
   const [state, dispatch] = useReducer(globalReducer, initialState);
+  
 
+  
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}

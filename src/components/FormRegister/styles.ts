@@ -69,6 +69,8 @@ type InputProps = {
     width?: string;
   };
 
+
+
 export const Form = styled.form`
     margin-top: 32px;
     display: grid;
@@ -108,18 +110,23 @@ export const PaymentForm = styled.div`
     display: flex;   
     margin-top: 32px;
 `
+interface PaymentProps {
+    isClicked: boolean;
+}
 
-export const PaymentMethod = styled.div`
+export const PaymentMethod = styled.div<PaymentProps>`
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 16px;
     width: 178.67px;
     height: 51px;
-    background: ${(props) => props.theme['base-button']};
     border-radius: 6px;
     justify-content: space-evenly;
     margin-right: 12px;
+    cursor: pointer;
+    background-color: ${props => (props.isClicked ? '#EBE5F9' : '#E6E5E5')};
+    border: ${(props) => props.isClicked ? '1px solid #8047F8' : 'none'};
 
     P {
         font-family: 'Roboto';
@@ -131,5 +138,10 @@ export const PaymentMethod = styled.div`
         color: ${(props) => props.theme['base-text']};
 
     }
+
+    /* &:active {
+        background: ${(props) => props.theme['purple-light']};
+        border: 1px solid ${(props) => props.theme['purple']};
+    } */
 `
 

@@ -24,11 +24,15 @@ export interface ICoffess {
 
 export function Home() {
 
-    const [state] = useReducer(globalReducer, initialState);
+    const { state } = useContext(AppContext);
 
     useEffect(() => {
         console.log(state.cartListProduct.length)
     },[state])
+
+    useEffect(() => {
+        localStorage.setItem("myState", JSON.stringify(state));
+      }, [state]);
 
     return (
         <HomeContainer>
@@ -38,6 +42,8 @@ export function Home() {
                     <h1>Encontre o café perfeito <br/> para qualquer hora do dia</h1>
                             
                     <StyledImage src={Vector2} alt=""/>
+                    <StyledImage src={Vector} alt=""/>
+                    
                     <Subtitle>
                     
                         Com o Coffee Delivery você recebe seu café onde estiver, a <br />
@@ -45,13 +51,7 @@ export function Home() {
                         
                     </Subtitle>
 
-                    <ul>
-                            {state.cartListProduct.map((product) => (
-                            <li key={product.id}>
-                                {product.name} - R${product.price}
-                            </li>
-                            ))}
-                    </ul>
+                   
 
                     <Items>    
                                         
@@ -75,6 +75,7 @@ export function Home() {
                         
                         <StyledImage src={Vector2} alt=""/>
                         <StyledImage src={Vector} alt=""/>
+                        <StyledImage src={Vector2} alt=""/>
                         
                             <p>
                             <span >
@@ -88,17 +89,15 @@ export function Home() {
                                     <img src={Icon3} alt=""/>
                                 </span>
                                 O café chega fresquinho até você
-                            </p>
-                            
-                        </SecondItem>
-                    
+                            </p>      
+                        </SecondItem>    
                     </Items>
+                    
                 </AdvertisingContainer>
                
                 <picture>
                     <source srcSet={coffee} type="imagem café" />
-                    <StyledImage src={Vector2} alt=""/>
-                    <StyledImage src={Vector} alt=""/>
+                   
                    
                     <img src={coffee} alt="Café" title="imagem propaganda café"/>
                 </picture>
@@ -107,6 +106,13 @@ export function Home() {
             
             <CoffeeProduct>
                <h2>Nossos cafés</h2> 
+               <ul>
+                    {state.cartListProduct.map((product) => (
+                    <li key={product.id}>
+                        {product.name} - R${product.price}
+                    </li>
+                    ))}
+               </ul>
                <CoffeeContainer>
                     {
                         coffees.map((coffee) => {
