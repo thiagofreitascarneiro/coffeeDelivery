@@ -23,8 +23,6 @@ export interface ICoffeeSelected {
 
 export function CardCoffee({content}: ICoffeeList ) {
 
-    // const [state, dispatch] = useReducer(globalReducer, initialState);
-
     const { handleCart } = useContext(AppContext)
 
     function selectedCoffeeToCart() {
@@ -35,9 +33,7 @@ export function CardCoffee({content}: ICoffeeList ) {
             price: content.price,
             quantity: 1 
         };
-        //  state.cartListProduct.push(newItem)
-        //  dispatch(addToCart(newItem));
-        //  console.log(state.cartListProduct)
+        
         handleCart(newItem)
     }
 

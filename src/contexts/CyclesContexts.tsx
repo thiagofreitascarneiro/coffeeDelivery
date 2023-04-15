@@ -25,6 +25,7 @@ export function AppProvider({
     dispatch(addToCart(item));
   }
 
+  
   return (
     <AppContext.Provider value={{ state, dispatch, cartItems, handleCart }}>
       {children}

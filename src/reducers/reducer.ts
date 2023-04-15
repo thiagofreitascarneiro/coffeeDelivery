@@ -10,16 +10,14 @@ export const initialState: State = {
   
 };
 
-export const globalReducer = (state = initialState, action: any) => {
+export const globalReducer = (state: State, action: any) => {
   console.log(state);
   switch (action.type) {
     case ActionTypes.ADD_NEW_CYCLE:
       return {       
         ...state,
         cartListProduct: [...state.cartListProduct, action.payload],
-        
-      };
-      
+      };   
     default:
       return state;
   }
