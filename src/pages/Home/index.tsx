@@ -24,10 +24,11 @@ export interface ICoffess {
 
 export function Home() {
 
-    const [state] = useReducer(globalReducer, initialState);
+    const { state } = useContext(AppContext);
+    const lista = state.cartListProduct;
 
     useEffect(() => {
-        console.log(state.cartListProduct.length)
+        console.log(lista)
     },[state])
 
     return (
@@ -35,7 +36,7 @@ export function Home() {
             <Header />
             <CoffeeAdvertising>
                 <AdvertisingContainer>
-                    <h1>Encontre o café perfeito <br/> para qualquer hora do dia</h1>
+                    <h1>Encontre oo café perfeito <br/> para qualquer hora do dia</h1>
                             
                     <StyledImage src={Vector2} alt=""/>
                     <Subtitle>
@@ -45,13 +46,7 @@ export function Home() {
                         
                     </Subtitle>
 
-                    <ul>
-                            {state.cartListProduct.map((product) => (
-                            <li key={product.id}>
-                                {product.name} - R${product.price}
-                            </li>
-                            ))}
-                    </ul>
+                    
 
                     <Items>    
                                         
@@ -94,6 +89,13 @@ export function Home() {
                     
                     </Items>
                 </AdvertisingContainer>
+                <ul>
+                    {lista.map((product) => (
+                    <li key={product.id}>
+                        {product.name} - R${product.price}
+                    </li>
+                    ))}
+                </ul>
                
                 <picture>
                     <source srcSet={coffee} type="imagem café" />

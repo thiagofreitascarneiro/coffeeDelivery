@@ -1,36 +1,32 @@
-import { ReactNode, createContext, useContext, useReducer } from "react";
-import { State, globalReducer } from "../reducers/reducer";
+import { ReactNode, createContext, useContext, useReducer, useState } from "react";
+import { State, globalReducer, initialState } from "../reducers/reducer";
+import { addToCart } from "../reducers/actions";
 
 interface ContextProps {
     state: State;
     dispatch: React.Dispatch<any>;
+    cartItems: any;
+    handleCart: (iitem: any) => void;
   }
 
-const initialState: State = {
-  cartListProduct: [],
-};
-
-export type MyObject = {
-  id: number;
-  name: string;
-};
 interface CyclesContextProviderProps {
   children: ReactNode;
 }
 
-export const AppContext = createContext<ContextProps>({
-  state: initialState,
-  dispatch: () => null,
-});
-
+export const AppContext = createContext({} as ContextProps);
 
 export function AppProvider({ 
   children 
 }:  CyclesContextProviderProps) {
   const [state, dispatch] = useReducer(globalReducer, initialState);
+  const [cartItems, setCartItems] = useState([]);
+
+  function handleCart(item: any) {
+    dispatch(addToCart(item));
+  }
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch, cartItems, handleCart }}>
       {children}
     </AppContext.Provider>
   );
