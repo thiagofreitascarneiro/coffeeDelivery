@@ -7,8 +7,16 @@ import { Cycle } from "../../reducers/actions";
 
 export function Cart() {
 
-    const { state, removeCoffeFromCart, handleQuantityCoffee } = useContext(AppContext);
+    const { state, 
+        removeCoffeFromCart, 
+        handleAddQuantityCoffee, 
+        handleRemoveQuantityCoffee } = useContext(AppContext);
     const coffeeListCart = state.cartListProduct;
+
+    useEffect(() => {
+        // aqui sera chamada a função que multiplica os valores pela quantidade 
+    }, [handleAddQuantityCoffee, handleRemoveQuantityCoffee])
+    
 
     return (
         <ContainerCart>
@@ -21,9 +29,9 @@ export function Cart() {
                     <ContainerButton>
                         <p>{coffee.name}</p>
                         <WrapperButton>
-                            <DecreaseButton onClick={() =>  handleQuantityCoffee(coffee.id)}>-</DecreaseButton>
+                            <DecreaseButton onClick={() => handleRemoveQuantityCoffee(coffee.id)}>-</DecreaseButton>
                             <QuantityButton>1</QuantityButton>
-                            <IncreaseButton onClick={() =>  handleQuantityCoffee(coffee.id)}>+</IncreaseButton>
+                            <IncreaseButton onClick={() => handleAddQuantityCoffee(coffee.id)}>+</IncreaseButton>
 
                             <ButtonRemove onClick={() => removeCoffeFromCart(coffee.id)}>
                                 <Trash size={20} color="#8047F8" />

@@ -13,6 +13,7 @@ export enum ActionTypes {
     ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',
     REMOVE_CYCLE = 'REMOVE_CYCLE',
     ADD_QUANTITY = 'ADD_QUANTITY',
+    REMOVE_QUANTITY = 'REMOVE_QUANTITY'
 }
 
 export const addToCart = (item: Cycle) => {
@@ -29,9 +30,16 @@ export const removeFromCart = (id: number) => {
   }
 }
 
-export const updateQuantity = (id: number) => {
+export const updateAddQuantity = (id: number) => {
   return {
     type: ActionTypes.ADD_QUANTITY,
+    payload: id,
+  }
+}
+
+export const updateRemoveQuantity = (id: number) => {
+  return {
+    type: ActionTypes.REMOVE_QUANTITY,
     payload: id,
   }
 }

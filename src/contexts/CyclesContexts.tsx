@@ -1,13 +1,14 @@
 import { ReactNode, createContext, useContext, useReducer, useState } from "react";
 import { State, globalReducer, initialState } from "../reducers/reducer";
-import { Cycle, addToCart, removeFromCart, updateQuantity } from "../reducers/actions";
+import { Cycle, addToCart, removeFromCart, updateAddQuantity, updateRemoveQuantity } from "../reducers/actions";
 
 interface ContextProps {
     state: State;
     dispatch: React.Dispatch<any>;
     addCoffeeToCart: (item: Cycle) => void;
     removeCoffeFromCart: (id: number) => void;
-    handleQuantityCoffee: (id: number) => void;
+    handleAddQuantityCoffee: (id: number) => void;
+    handleRemoveQuantityCoffee: (id: number) => void;
   }
 
 interface CyclesContextProviderProps {
@@ -35,8 +36,12 @@ export function AppProvider({
     dispatch(removeFromCart(item));
   }
 
-  function handleQuantityCoffee(id: number) {
-    dispatch(updateQuantity(id));
+  function handleAddQuantityCoffee(id: number) {
+    dispatch(updateAddQuantity(id));
+  }
+
+  function handleRemoveQuantityCoffee(id: number) {
+    dispatch(updateRemoveQuantity(id));
   }
 
   return (
@@ -45,7 +50,8 @@ export function AppProvider({
       dispatch, 
       addCoffeeToCart, 
       removeCoffeFromCart, 
-      handleQuantityCoffee
+      handleAddQuantityCoffee,
+      handleRemoveQuantityCoffee
        }}>
       {children}
     </AppContext.Provider>

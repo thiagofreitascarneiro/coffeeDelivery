@@ -42,7 +42,23 @@ export const globalReducer = (state: State, action: any) => {
         ...state,
         cartListProduct: newList,
       };
-
+    case ActionTypes.REMOVE_QUANTITY:
+      const newListRemove = state.cartListProduct.map((data) => {
+        if (data.id === action.payload && data.quantity > 1) {
+          console.log(data.id)
+          return {
+            ...data,
+            quantity: data.quantity - 1,
+          };
+        } else {
+          return data;
+        }
+      });
+      console.log('nova lista add', newListRemove)
+      return {
+        ...state,
+        cartListProduct: newListRemove,
+      };
     default:
       return state;
   }
