@@ -12,11 +12,10 @@ export interface Cycle {
 export enum ActionTypes {
     ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',
     REMOVE_CYCLE = 'REMOVE_CYCLE',
+    ADD_QUANTITY = 'ADD_QUANTITY',
 }
 
 export const addToCart = (item: Cycle) => {
-  console.log(item)
-
   return {
     type: ActionTypes.ADD_NEW_CYCLE,
     payload: item,
@@ -24,12 +23,15 @@ export const addToCart = (item: Cycle) => {
 };
 
 export const removeFromCart = (id: number) => {
-
-  console.log(id)
-
   return {
     type: ActionTypes.REMOVE_CYCLE,
     payload: id,
   }
- 
+}
+
+export const updateQuantity = (id: number) => {
+  return {
+    type: ActionTypes.ADD_QUANTITY,
+    payload: id,
+  }
 }

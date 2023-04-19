@@ -21,12 +21,28 @@ export const globalReducer = (state: State, action: any) => {
     case ActionTypes.REMOVE_CYCLE:
       const newCoffeeList = state.cartListProduct.filter(
         (coffee) => coffee.id !== action.payload);
-        console.log(newCoffeeList);
-        console.log(state);
       return {
         ...state,
         cartListProduct: newCoffeeList,
       }   
+    case ActionTypes.ADD_QUANTITY:
+      const newList = state.cartListProduct.map((data) => {
+        if (data.id === action.payload) {
+          console.log(data.id)
+          return {
+            ...data,
+            quantity: data.quantity + 1,
+          };
+        } else {
+          return data;
+        }
+      });
+      console.log('nova lista add', newList)
+      return {
+        ...state,
+        cartListProduct: newList,
+      };
+
     default:
       return state;
   }

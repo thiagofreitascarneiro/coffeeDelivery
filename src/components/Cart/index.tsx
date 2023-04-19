@@ -3,15 +3,12 @@ import  americano  from '../../../public/americano.png'
 import { Trash } from "phosphor-react";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../contexts/CyclesContexts";
+import { Cycle } from "../../reducers/actions";
 
 export function Cart() {
 
-    const { state, removeCoffeFromCart, handleQuantityCart } = useContext(AppContext);
+    const { state, removeCoffeFromCart, handleQuantityCoffee } = useContext(AppContext);
     const coffeeListCart = state.cartListProduct;
-
-    function removeCoffee(id: number) {
-        removeCoffeFromCart(id);
-    }
 
     return (
         <ContainerCart>
@@ -24,11 +21,11 @@ export function Cart() {
                     <ContainerButton>
                         <p>{coffee.name}</p>
                         <WrapperButton>
-                            <DecreaseButton onClick={() => handleQuantityCart(coffee.id, 'decrease')}>-</DecreaseButton>
+                            <DecreaseButton onClick={() =>  handleQuantityCoffee(coffee.id)}>-</DecreaseButton>
                             <QuantityButton>1</QuantityButton>
-                            <IncreaseButton onClick={() => handleQuantityCart(coffee.id, 'increase')}>+</IncreaseButton>
+                            <IncreaseButton onClick={() =>  handleQuantityCoffee(coffee.id)}>+</IncreaseButton>
 
-                            <ButtonRemove onClick={() => removeCoffee(coffee.id)}>
+                            <ButtonRemove onClick={() => removeCoffeFromCart(coffee.id)}>
                                 <Trash size={20} color="#8047F8" />
                                 Remover
                             </ButtonRemove>
