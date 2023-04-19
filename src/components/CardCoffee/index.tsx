@@ -2,10 +2,11 @@ import { ButtonCart, CartContainer, ControlCoffee, DecreaseButton, IncreaseButto
 
 import { ShoppingCart } from "phosphor-react";
  
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import { ICoffess } from "../../pages/Home";
 import { globalReducer, initialState } from "../../reducers/reducer";
 import { addToCart } from "../../reducers/actions";
+import { AppContext } from "../../contexts/CyclesContexts";
 
 interface ICoffeeList {
     content: ICoffess,
@@ -22,8 +23,7 @@ export interface ICoffeeSelected {
 
 export function CardCoffee({content}: ICoffeeList ) {
 
-    const [state, dispatch] = useReducer(globalReducer, initialState);
-
+    const { addCoffeeToCart } = useContext(AppContext)
 
     function selectedCoffeeToCart() {
         const newItem = { 
@@ -33,9 +33,8 @@ export function CardCoffee({content}: ICoffeeList ) {
             price: content.price,
             quantity: 1 
         };
-         state.cartListProduct.push(newItem)
-        dispatch(addToCart(newItem));
-        console.log(state.cartListProduct)
+        
+        addCoffeeToCart(newItem);
     }
 
     return (

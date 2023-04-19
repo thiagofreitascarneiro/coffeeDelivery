@@ -1,40 +1,59 @@
-import { ReactNode, createContext, useContext, useReducer } from "react";
+import { ReactNode, createContext, useContext, useReducer, useState } from "react";
 import { State, globalReducer, initialState } from "../reducers/reducer";
-import { addToCart } from "../reducers/actions";
+import { Cycle, addToCart, removeFromCart } from "../reducers/actions";
 
 interface ContextProps {
     state: State;
     dispatch: React.Dispatch<any>;
+    addCoffeeToCart: (item: Cycle) => void;
+    removeCoffeFromCart: (id: number) => void;
+    handleQuantityCart: (cartCoffeeId: number, type: 'increase' | 'decrease') => void;
   }
 
 interface CyclesContextProviderProps {
   children: ReactNode;
 }
 
-export interface Action {
-  type: string;
-  payload?: any;
-}
+export const AppContext = createContext({} as ContextProps);
 
-export interface AppContextType {
-  state: State;
-  dispatch: React.Dispatch<Action>;
-  handleAddToCart: (value: any) => void;
-}
-
-export const AppContext = createContext<ContextProps>({
-  state: initialState,
-  dispatch: () => null,
-});
-
-export function AppProvider({ children}: CyclesContextProviderProps) {
+export function AppProvider({ 
+  children 
+}:  CyclesContextProviderProps) {
   const [state, dispatch] = useReducer(globalReducer, initialState);
+  const [cart, setCart] = useState<Cycle>();
 
-  function handleAddToCart(value: any) {
-    dispatch(addToCart(value));
-  }  
+  function addCoffeeToCart(item: Cycle) {
+    const verifyProductExist = state.cartListProduct.find((coffee: Cycle) => {
+      return coffee.id === item.id;
+    })
+    console.log(verifyProductExist)
+    if(!verifyProductExist) {
+      dispatch(addToCart(item));
+    }
+  }
+
+  function handleQuantityCart(cartCoffeeId: number, 
+    type: 'increase' | 'decrease') {
+      const coffee = state.cartListProduct.find((coffee: Cycle) => {
+        return coffee.id === cartCoffeeId;
+      })
+      console.log(coffee)
+      const newCartCoffeeQuantity = type === 'increase' ? coffee.quantity + 1 : coffee.quantity - 1;
+      dispatch(addToCart(newCartCoffeeQuantity));
+      console.log(state.cartListProduct)
+  }
+
+  function removeCoffeFromCart(item: number) {
+    dispatch(removeFromCart(item));
+  }
+
   return (
-    <AppContext.Provider value={{ state, dispatch, handleAddToCart }}>
+    <AppContext.Provider value={{ 
+      state, 
+      dispatch, 
+      addCoffeeToCart, 
+      removeCoffeFromCart, 
+      handleQuantityCart }}>
       {children}
     </AppContext.Provider>
   );

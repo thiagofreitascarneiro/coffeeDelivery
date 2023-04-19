@@ -6,32 +6,40 @@ import { AppContext } from "../../contexts/CyclesContexts";
 
 export function Cart() {
 
+    const { state, removeCoffeFromCart, handleQuantityCart } = useContext(AppContext);
+    const coffeeListCart = state.cartListProduct;
+
+    function removeCoffee(id: number) {
+        removeCoffeFromCart(id);
+    }
+
     return (
         <ContainerCart>
-            <CoffeeSlected>
-                <Picture>
-                    <img src={americano} />          
-                </Picture>
-                
-                <ContainerButton>
-                    <p>Expresso Tradicional</p>
-                    <WrapperButton>
-                        <DecreaseButton>-</DecreaseButton>
-                        <QuantityButton>1</QuantityButton>
-                        <IncreaseButton>+</IncreaseButton>
+            {coffeeListCart.map((coffee) => (
+                <><CoffeeSlected key={coffee.id}>
+                    <Picture>
+                        <img src={coffee.photo} />
+                    </Picture>
 
-                        <ButtonRemove>
-                            <Trash size={20} color="#8047F8"/>
-                            Remover
-                        </ButtonRemove>
-                    </WrapperButton>
-                </ContainerButton>
-                <CoffeePrice>
-                    <p>R$ 9,90</p>
-                </CoffeePrice>
-            </CoffeeSlected>
+                    <ContainerButton>
+                        <p>{coffee.name}</p>
+                        <WrapperButton>
+                            <DecreaseButton onClick={() => handleQuantityCart(coffee.id, 'decrease')}>-</DecreaseButton>
+                            <QuantityButton>1</QuantityButton>
+                            <IncreaseButton onClick={() => handleQuantityCart(coffee.id, 'increase')}>+</IncreaseButton>
 
-            <Line />
+                            <ButtonRemove onClick={() => removeCoffee(coffee.id)}>
+                                <Trash size={20} color="#8047F8" />
+                                Remover
+                            </ButtonRemove>
+                        </WrapperButton>
+                    </ContainerButton>
+                    <CoffeePrice>
+                        <p>R$ {coffee.price}</p>
+                    </CoffeePrice>
+                </CoffeeSlected><Line /></>
+            ))}
+           
 
             <WrapperDelivery>
                 <TotalItems>
