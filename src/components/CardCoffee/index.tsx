@@ -23,7 +23,7 @@ export interface ICoffeeSelected {
 
 export function CardCoffee({content}: ICoffeeList ) {
 
-    const { handleCart } = useContext(AppContext)
+    const { addCoffeeToCart } = useContext(AppContext)
 
     function selectedCoffeeToCart() {
         const newItem = { 
@@ -34,7 +34,7 @@ export function CardCoffee({content}: ICoffeeList ) {
             quantity: 1 
         };
         
-        handleCart(newItem)
+        addCoffeeToCart(newItem);
     }
 
     return (

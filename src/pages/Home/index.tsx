@@ -24,13 +24,6 @@ export interface ICoffess {
 
 export function Home() {
 
-    const { state } = useContext(AppContext);
-    const lista = state.cartListProduct;
-
-    useEffect(() => {
-        console.log(lista)
-    },[state])
-
     return (
         <HomeContainer>
             <Header />
@@ -85,18 +78,11 @@ export function Home() {
                     
                     </Items>
                 </AdvertisingContainer>
-                <ul>
-                    {lista.map((product) => (
-                    <li key={product.id}>
-                        {product.name} - R${product.price}
-                    </li>
-                    ))}
-                </ul>
-               
+                
                 <picture>
                     <source srcSet={coffee} type="imagem café" />
-                    <StyledImage src={Vector2} alt=""/>
-                    <StyledImage src={Vector} alt=""/>
+                    
+                    
                    
                     <img src={coffee} alt="Café" title="imagem propaganda café"/>
                 </picture>

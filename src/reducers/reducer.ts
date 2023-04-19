@@ -17,7 +17,16 @@ export const globalReducer = (state: State, action: any) => {
       return {       
         ...state,
         cartListProduct: [...state.cartListProduct, action.payload],
-      };   
+      };
+    case ActionTypes.REMOVE_CYCLE:
+      const newCoffeeList = state.cartListProduct.filter(
+        (coffee) => coffee.id !== action.payload);
+        console.log(newCoffeeList);
+        console.log(state);
+      return {
+        ...state,
+        cartListProduct: newCoffeeList,
+      }   
     default:
       return state;
   }

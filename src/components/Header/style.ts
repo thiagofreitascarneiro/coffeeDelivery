@@ -55,4 +55,31 @@ export const Cart = styled.div`
     background: ${(props) => props.theme['yellow-light']};
     border-radius: 6px;
     cursor: pointer;
+    position: relative;
+`
+
+export const QuantityCart = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: ${(props) => props.theme['yellow-dark']};
+    border-radius: 1000px;
+    position: absolute;
+    top: -8px;
+    right: -7px;
+
+    p {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15.6px;
+        text-align: center;
+        letter-spacing: -0.06em;
+        color: ${(props) => props.theme.white};
+    }
 `

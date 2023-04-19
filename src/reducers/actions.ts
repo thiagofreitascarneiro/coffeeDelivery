@@ -5,12 +5,13 @@ export interface Cycle {
   name: string;
   photo: string;
   price: number,
-  quantity?: number;
+  quantity: number;
   
 }
 
 export enum ActionTypes {
     ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',
+    REMOVE_CYCLE = 'REMOVE_CYCLE',
 }
 
 export const addToCart = (item: Cycle) => {
@@ -20,5 +21,15 @@ export const addToCart = (item: Cycle) => {
     type: ActionTypes.ADD_NEW_CYCLE,
     payload: item,
   }
-  
 };
+
+export const removeFromCart = (id: number) => {
+
+  console.log(id)
+
+  return {
+    type: ActionTypes.REMOVE_CYCLE,
+    payload: id,
+  }
+ 
+}
