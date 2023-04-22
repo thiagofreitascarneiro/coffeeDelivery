@@ -1,5 +1,6 @@
 import {ActionTypes } from "./actions";
-import {Cycle} from "./actions"
+import {Cycle} from "./actions";
+import {produce} from 'immer'
 
 export interface State {
   cartListProduct: Cycle[];
@@ -32,6 +33,7 @@ export const globalReducer = (state: State, action: any) => {
           return {
             ...data,
             quantity: data.quantity + 1,
+            total: data.price * data.quantity
           };
         } else {
           return data;
@@ -42,6 +44,24 @@ export const globalReducer = (state: State, action: any) => {
         ...state,
         cartListProduct: newList,
       };
+    case ActionTypes.CHANGE_QUANTITY:
+      const newListTotalPrice = state.cartListProduct.map((data) => {
+        if (data.id === action.payload) {
+          console.log(data.id)
+          return {
+            ...data,
+            total: data.price * data.quantity
+          };
+        } else {
+          return data;
+        }
+      });
+      console.log('nova lista add', newListTotalPrice)
+      return {
+        ...state,
+        cartListProduct: newListTotalPrice,
+      };
+
     case ActionTypes.REMOVE_QUANTITY:
       const newListRemove = state.cartListProduct.map((data) => {
         if (data.id === action.payload && data.quantity > 1) {
@@ -49,6 +69,7 @@ export const globalReducer = (state: State, action: any) => {
           return {
             ...data,
             quantity: data.quantity - 1,
+            total: data.price * data.quantity
           };
         } else {
           return data;

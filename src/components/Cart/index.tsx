@@ -10,13 +10,16 @@ export function Cart() {
     const { state, 
         removeCoffeFromCart, 
         handleAddQuantityCoffee, 
-        handleRemoveQuantityCoffee } = useContext(AppContext);
+        handleRemoveQuantityCoffee,
+        handleChangeTotalPrice } = useContext(AppContext);
     const coffeeListCart = state.cartListProduct;
 
-    useEffect(() => {
-        // aqui sera chamada a função que multiplica os valores pela quantidade 
-    }, [handleAddQuantityCoffee, handleRemoveQuantityCoffee])
-    
+    const formatCurrency = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
 
     return (
         <ContainerCart>
@@ -29,18 +32,26 @@ export function Cart() {
                     <ContainerButton>
                         <p>{coffee.name}</p>
                         <WrapperButton>
-                            <DecreaseButton onClick={() => handleRemoveQuantityCoffee(coffee.id)}>-</DecreaseButton>
+                            <DecreaseButton onClick={() => {
+                                handleRemoveQuantityCoffee(coffee.id); 
+                                handleChangeTotalPrice(coffee.id)}}>
+                                    -
+                            </DecreaseButton>
                             <QuantityButton>1</QuantityButton>
-                            <IncreaseButton onClick={() => handleAddQuantityCoffee(coffee.id)}>+</IncreaseButton>
+                            <IncreaseButton onClick={() => {
+                                handleAddQuantityCoffee(coffee.id); 
+                                handleChangeTotalPrice(coffee.id)}}>
+                                    +
+                            </IncreaseButton>
 
-                            <ButtonRemove onClick={() => removeCoffeFromCart(coffee.id)}>
+                            <ButtonRemove onClick={() => removeCoffeFromCart(coffee.id) }>
                                 <Trash size={20} color="#8047F8" />
                                 Remover
                             </ButtonRemove>
                         </WrapperButton>
                     </ContainerButton>
                     <CoffeePrice>
-                        <p>R$ {coffee.price}</p>
+                        <p> {formatCurrency.format(coffee.total)}</p>
                     </CoffeePrice>
                 </CoffeeSlected><Line /></>
             ))}

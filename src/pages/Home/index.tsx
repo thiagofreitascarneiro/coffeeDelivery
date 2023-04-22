@@ -9,9 +9,7 @@ import Vector from '../../assets/Vector.png';
 import Vector2 from '../../assets/Vector2.png';
 import { CardCoffee } from "../../components/CardCoffee";
 import {coffees} from "../../data/coffees";
-import { AppContext } from "../../contexts/CyclesContexts";
-import { useContext, useEffect, useReducer } from "react";
-import { globalReducer, initialState } from "../../reducers/reducer";
+
 
 export interface ICoffess {
     id: number;
@@ -20,6 +18,7 @@ export interface ICoffess {
     description: string;
     price: number;
     photo: string;
+    
 }
 
 export function Home() {

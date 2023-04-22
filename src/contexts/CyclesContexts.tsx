@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext, useReducer, useState } from "react";
 import { State, globalReducer, initialState } from "../reducers/reducer";
-import { Cycle, addToCart, removeFromCart, updateAddQuantity, updateRemoveQuantity } from "../reducers/actions";
+import { Cycle, addToCart, removeFromCart, totalPrice, updateAddQuantity, updateRemoveQuantity } from "../reducers/actions";
 
 interface ContextProps {
     state: State;
@@ -9,6 +9,7 @@ interface ContextProps {
     removeCoffeFromCart: (id: number) => void;
     handleAddQuantityCoffee: (id: number) => void;
     handleRemoveQuantityCoffee: (id: number) => void;
+    handleChangeTotalPrice: (id: number) => void;
   }
 
 interface CyclesContextProviderProps {
@@ -44,6 +45,10 @@ export function AppProvider({
     dispatch(updateRemoveQuantity(id));
   }
 
+  function handleChangeTotalPrice(id: number) {
+    dispatch(totalPrice(id));
+  }
+
   return (
     <AppContext.Provider value={{ 
       state, 
@@ -51,7 +56,8 @@ export function AppProvider({
       addCoffeeToCart, 
       removeCoffeFromCart, 
       handleAddQuantityCoffee,
-      handleRemoveQuantityCoffee
+      handleRemoveQuantityCoffee,
+      handleChangeTotalPrice,
        }}>
       {children}
     </AppContext.Provider>

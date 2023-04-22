@@ -19,6 +19,7 @@ export interface ICoffeeSelected {
     photo: string,
     price: number;
     quantity: number;
+    total: number;
 }
 
 export function CardCoffee({content}: ICoffeeList ) {
@@ -31,7 +32,8 @@ export function CardCoffee({content}: ICoffeeList ) {
             name: content.name,
             photo: content.photo,
             price: content.price,
-            quantity: 1 
+            quantity: 1,
+            total: content.price
         };
         
         addCoffeeToCart(newItem);
