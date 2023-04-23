@@ -1,6 +1,6 @@
 import { ButtonConfirm, ButtonRemove, CoffeePrice, CoffeeSlected , ContainerButton, ContainerCart, DecreaseButton, IncreaseButton, Line, Picture, PriceDelivery, QuantityButton, TotalCart, TotalItems, WrapperButton, WrapperDelivery } from "./styles";
 import { Trash } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../contexts/CyclesContexts";
 import { formatCurrency } from "../../helpers";
 
@@ -12,6 +12,12 @@ export function Cart() {
         handleRemoveQuantityCoffee,
         handleChangeTotalPrice } = useContext(AppContext);
     const coffeeListCart = state.cartListProduct;
+    let totalItemsCart = 0
+
+    const countPriceItemsCart = coffeeListCart.map(coffee => {
+       return totalItemsCart = coffee.total + totalItemsCart
+    });
+
 
     return (
         <ContainerCart>
@@ -52,7 +58,7 @@ export function Cart() {
             <WrapperDelivery>
                 <TotalItems>
                     <p>total de itens</p>
-                    <p>R$ 29,70</p>
+                    <p>{formatCurrency.format(totalItemsCart)}</p>
                 </TotalItems>
                 <PriceDelivery>
                     <p>entrega</p>

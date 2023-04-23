@@ -86,6 +86,7 @@ export const Input = styled.input<InputProps>`
     border: 1px solid #E6E5E5;
     border-radius: 4px;
     margin-right: 12px;
+    padding: 15px;
     ${({ fullWidth }) => fullWidth && 'grid-column: 1 / -1;'};
     
     ::placeholder {

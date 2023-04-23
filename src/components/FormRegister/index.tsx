@@ -98,9 +98,10 @@ export function FormRegister() {
                                         <Input type="text" width="60px"  value={endereco?.uf}  name="state" placeholder="UF" />
                                     </InputDiv>
                                     
+                                    <button type="submit">Submit</button>
                             </div></>
                             
-                            {/* <button type="submit">Submit</button> */}
+                             
                         </Form>
                     </FormAdress>
                 </DeliveryAddress>
