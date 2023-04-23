@@ -11,8 +11,14 @@ import { DeliveryAddress,
             ProductService, 
             Subtitle, 
             Title } from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+interface Endereco {
+    logradouro: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
+  }
 
 
 export function FormRegister() {
@@ -20,6 +26,8 @@ export function FormRegister() {
     const [payment1Clicked, setPayment1Clicked] = useState(false);
     const [payment2Clicked, setPayment2Clicked] = useState(false);
     const [payment3Clicked, setPayment3Clicked] = useState(false);
+    const [cep, setCep] = useState('');
+    const [endereco, setEndereco] = useState<Endereco | null>(null);
 
     function handleClickPayment1() {
         setPayment1Clicked(true);
@@ -36,7 +44,20 @@ export function FormRegister() {
         setPayment2Clicked(false);
         setPayment3Clicked(true);
     }
-    
+    useEffect(() => {
+        if (cep.length === 8) {
+          fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+              setEndereco(data);
+              console.log(data);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+      }, [cep]);
+      
     return (
         <ProductService>    
             <Order>
@@ -53,30 +74,32 @@ export function FormRegister() {
                         </div> 
                         <Form >
                             <label htmlFor="zipCode"></label>
-                            <Input type="text" name="zipCode" fullWidth placeholder="CEP"/>
-
-                            <label htmlFor="street"></label>
-                            <Input type="text" name="street" width='560px' fullWidth placeholder="Rua"/>
+                            <Input type="text" name="zipCode" value={cep} 
+                                onChange={e => setCep(e.target.value)} fullWidth placeholder="CEP"/>
+                            <>
+                            <label htmlFor="street"></label><Input type="text" 
+                            name="street" width='560px'value={endereco?.logradouro} fullWidth placeholder="Rua" />
                             <div>
-                                <InputDiv>
-                                    <label htmlFor="number"></label>
-                                    <Input type="text" name="city" placeholder="Número"/>
+                                    <InputDiv>
+                                        <label htmlFor="number"></label>
+                                        <Input type="text" name="city" placeholder="Número" />
 
-                                    <label htmlFor="complement address"></label>
-                                    <Input type="text" width="348px" name="complement" placeholder="Complemento"/>
-                                </InputDiv>
-                                <InputDiv>
-                                    <label htmlFor="city"></label>
-                                    <Input type="text" name="city" placeholder="Cidade"/>
+                                        <label htmlFor="complement address"></label>
+                                        <Input type="text" width="348px" name="complemento" placeholder="Complemento" />
+                                    </InputDiv>
+                                    <InputDiv>
+                                        <label htmlFor="city"></label>
+                                        <Input type="text" name="city" value={endereco?.localidade} placeholder="Cidade" />
 
-                                    <label htmlFor="neighborhood"></label>
-                                    <Input type="text" width="276px" name="neighborhood" placeholder="Bairro"/>
+                                        <label htmlFor="neighborhood"></label>
+                                        <Input type="text" width="276px" value={endereco?.bairro}  name="neighborhood" placeholder="Bairro" />
 
-                                    <label htmlFor="state"></label>
-                                    <Input type="text" width="60px" name="state" placeholder="UF"/>
-                                </InputDiv>
-                            </div>
-
+                                        <label htmlFor="state"></label>
+                                        <Input type="text" width="60px"  value={endereco?.uf}  name="state" placeholder="UF" />
+                                    </InputDiv>
+                                    
+                            </div></>
+                            
                             {/* <button type="submit">Submit</button> */}
                         </Form>
                     </FormAdress>

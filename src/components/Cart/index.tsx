@@ -1,9 +1,8 @@
 import { ButtonConfirm, ButtonRemove, CoffeePrice, CoffeeSlected , ContainerButton, ContainerCart, DecreaseButton, IncreaseButton, Line, Picture, PriceDelivery, QuantityButton, TotalCart, TotalItems, WrapperButton, WrapperDelivery } from "./styles";
-import  americano  from '../../../public/americano.png'
 import { Trash } from "phosphor-react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../contexts/CyclesContexts";
-import { Cycle } from "../../reducers/actions";
+import { formatCurrency } from "../../helpers";
 
 export function Cart() {
 
@@ -13,13 +12,6 @@ export function Cart() {
         handleRemoveQuantityCoffee,
         handleChangeTotalPrice } = useContext(AppContext);
     const coffeeListCart = state.cartListProduct;
-
-    const formatCurrency = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
 
     return (
         <ContainerCart>

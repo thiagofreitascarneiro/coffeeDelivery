@@ -2,11 +2,10 @@ import { ButtonCart, CartContainer, ControlCoffee, DecreaseButton, IncreaseButto
 
 import { ShoppingCart } from "phosphor-react";
  
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext } from "react";
 import { ICoffess } from "../../pages/Home";
-import { globalReducer, initialState } from "../../reducers/reducer";
-import { addToCart } from "../../reducers/actions";
 import { AppContext } from "../../contexts/CyclesContexts";
+import { formatCurrency } from "../../helpers";
 
 interface ICoffeeList {
     content: ICoffess,
@@ -24,7 +23,10 @@ export interface ICoffeeSelected {
 
 export function CardCoffee({content}: ICoffeeList ) {
 
-    const { addCoffeeToCart } = useContext(AppContext)
+    const { addCoffeeToCart, 
+        handleAddQuantityCoffee, 
+        handleRemoveQuantityCoffee,
+        handleChangeTotalPrice } = useContext(AppContext)
 
     function selectedCoffeeToCart() {
         const newItem = { 
@@ -56,11 +58,18 @@ export function CardCoffee({content}: ICoffeeList ) {
                <SubtitleCoffee>{content.description}</SubtitleCoffee>
             </NameCoffee>
             <ControlCoffee>
-                <Price>R$ <span>{content.price}</span></Price>
+                <Price> <span>{formatCurrency.format(content.price)}</span></Price>
                 <div>
-                    <DecreaseButton>-</DecreaseButton>
+                    <DecreaseButton onClick={() => {
+                        handleRemoveQuantityCoffee(content.id); 
+                        handleChangeTotalPrice(content.id)}}>-</DecreaseButton>
                     <QuantityButton>1</QuantityButton>
-                    <IncreaseButton>+</IncreaseButton>
+                    <IncreaseButton 
+                        onClick={() => {
+                        handleAddQuantityCoffee(content.id); 
+                        handleChangeTotalPrice(content.id)}} >
+                            +
+                    </IncreaseButton>
                 </div>
                 <ButtonCart
                     onClick={selectedCoffeeToCart}
