@@ -39,7 +39,7 @@ export function AppProvider({
     const verifyProductExist = state.cartListProduct.find((coffee: Cycle) => {
       return coffee.id === item.id;
     })
-    console.log(verifyProductExist)
+  
     if(!verifyProductExist) {
       dispatch(addToCart(item));
     }
@@ -66,7 +66,7 @@ export function AppProvider({
   }
 
   function setPaymentMethod(payment: string) {
-    console.log('cycle,', payment )
+    
     dispatchPayment(setPayment(payment))
   }
 
