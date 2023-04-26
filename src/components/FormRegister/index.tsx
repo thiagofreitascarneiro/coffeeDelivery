@@ -64,7 +64,7 @@ export function FormRegister() {
         setPayment({
             payment: 'cartão de crédito'
           });
-        console.log(payment)
+        
     }
     function handleClickPayment2() {
         setPayment1Clicked(false);
@@ -73,7 +73,7 @@ export function FormRegister() {
         setPayment({
             payment: 'cartão de débito'
           });
-        console.log(payment)
+        
     }
     function handleClickPayment3() {
         setPayment1Clicked(false);
@@ -82,12 +82,12 @@ export function FormRegister() {
         setPayment({
             payment: 'dinheiro'
           });
-       console.log(payment)
+       
     }
 
     useEffect(() => {
         setPaymentMethod(payment.payment);
-        console.log(payment.payment)
+      
     }, [payment])
     
    
@@ -98,13 +98,13 @@ export function FormRegister() {
             .then(response => response.json())
             .then(data => {
               setEndereco(data);
-              console.log(data);
+              
             })
             .catch(error => {
-              console.error(error);
+             
             });
         }
-        console.log(endereco)
+       
        
       }, [cep]);
       
