@@ -112,6 +112,11 @@ export const WrapperDelivery = styled.div`
   width: 368px;
   height: 200px;
   gap: 15px;
+
+  a {
+    text-decoration: none;
+    cursor: pointer; 
+  }
 `
 
 export const TotalItems = styled.div`
@@ -158,7 +163,7 @@ export const ButtonConfirm = styled.button`
   align-items: center;
   justify-content: center;
   padding: 12px 8px;
-  
+  cursor: pointer;
   border: none;
   color: ${(props) => props.theme.white};
   width: 368px;

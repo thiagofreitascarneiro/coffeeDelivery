@@ -1,5 +1,5 @@
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
-import { DeliveryAddress, 
+import { ButtonSubmit, DeliveryAddress, 
             Form, 
             FormAdress, 
             Input, 
@@ -10,40 +10,88 @@ import { DeliveryAddress,
             PaymentMethod, 
             ProductService, 
             Subtitle, 
-            Title } from "./styles";
+            Title,
+            WrapperButtonSubmit,
+             } from "./styles";
 import { useEffect, useState } from "react";
+import { AppContext } from "../../contexts/CyclesContexts";
+import { useContext } from "react";
 
 interface Endereco {
-    logradouro: string;
-    bairro: string;
-    localidade: string;
-    uf: string;
+    bairro : string,
+    cep : string,
+    complemento?: string,
+    ddd: string,
+    ibge?: string,
+    localidade: string,
+    logradouro: string,
+    siafi: string,
+    uf: string,
+    numero: string
   }
 
 
 export function FormRegister() {
 
+    const {setFormUser, setPaymentMethod } = useContext(AppContext)
+
     const [payment1Clicked, setPayment1Clicked] = useState(false);
     const [payment2Clicked, setPayment2Clicked] = useState(false);
     const [payment3Clicked, setPayment3Clicked] = useState(false);
     const [cep, setCep] = useState('');
-    const [endereco, setEndereco] = useState<Endereco | null>(null);
+    const [endereco, setEndereco] = useState<Endereco>({
+        bairro: '',
+        cep: '',
+        ddd: '',
+        complemento: '',
+        localidade: '',
+        logradouro: '',
+        siafi: '',
+        uf: '',
+        ibge: '',
+        numero: '',
+        
+    });
+
+    const [payment, setPayment] = useState({
+        payment: ''
+      });
 
     function handleClickPayment1() {
         setPayment1Clicked(true);
         setPayment2Clicked(false);
         setPayment3Clicked(false);
+        setPayment({
+            payment: 'cartão de crédito'
+          });
+        console.log(payment)
     }
     function handleClickPayment2() {
         setPayment1Clicked(false);
         setPayment2Clicked(true);
         setPayment3Clicked(false);
+        setPayment({
+            payment: 'cartão de débito'
+          });
+        console.log(payment)
     }
     function handleClickPayment3() {
         setPayment1Clicked(false);
         setPayment2Clicked(false);
         setPayment3Clicked(true);
+        setPayment({
+            payment: 'dinheiro'
+          });
+       console.log(payment)
     }
+
+    useEffect(() => {
+        setPaymentMethod(payment.payment);
+        console.log(payment.payment)
+    }, [payment])
+    
+   
+
     useEffect(() => {
         if (cep.length === 8) {
           fetch(`https://viacep.com.br/ws/${cep}/json/`)
@@ -56,7 +104,28 @@ export function FormRegister() {
               console.error(error);
             });
         }
+        console.log(endereco)
+       
       }, [cep]);
+      
+      function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        if(endereco) {
+            setFormUser(endereco);
+        }  
+        setEndereco({
+            bairro: '',
+            cep: '',
+            ddd: '',
+            complemento: '',
+            localidade: '',
+            logradouro: '',
+            siafi: '',
+            uf: '',
+            ibge: '',
+            numero: '',
+        })
+      }
       
     return (
         <ProductService>    
@@ -72,9 +141,9 @@ export function FormRegister() {
                                 Informe o endereço onde deseja receber seu pedido
                             </Subtitle>
                         </div> 
-                        <Form >
+                        <Form onSubmit={handleSubmit}>
                             <label htmlFor="zipCode"></label>
-                            <Input type="text" name="zipCode" value={cep} 
+                            <Input type="text" name="zipCode" value={endereco?.cep} 
                                 onChange={e => setCep(e.target.value)} fullWidth placeholder="CEP"/>
                             <>
                             <label htmlFor="street"></label><Input type="text" 
@@ -82,10 +151,14 @@ export function FormRegister() {
                             <div>
                                     <InputDiv>
                                         <label htmlFor="number"></label>
-                                        <Input type="text" name="city" placeholder="Número" />
+                                        <Input type="text" name="number"
+                                               value={endereco?.numero}
+                                               onChange={(event) => setEndereco({ ...endereco, numero: event.target.value})} placeholder="Número" />
 
                                         <label htmlFor="complement address"></label>
-                                        <Input type="text" width="348px" name="complemento" placeholder="Complemento" />
+                                        <Input type="text" width="348px" name="complemento" 
+                                                value={endereco?.complemento}
+                                               onChange={(event) => setEndereco({ ...endereco, complemento: event.target.value})} placeholder="Complemento" />
                                     </InputDiv>
                                     <InputDiv>
                                         <label htmlFor="city"></label>
@@ -97,8 +170,9 @@ export function FormRegister() {
                                         <label htmlFor="state"></label>
                                         <Input type="text" width="60px"  value={endereco?.uf}  name="state" placeholder="UF" />
                                     </InputDiv>
-                                    
-                                    <button type="submit">Submit</button>
+                                    <WrapperButtonSubmit>
+                                        <ButtonSubmit type="submit">Confirmar</ButtonSubmit>
+                                    </WrapperButtonSubmit>
                             </div></>
                             
                              

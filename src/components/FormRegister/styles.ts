@@ -18,7 +18,7 @@ export const DeliveryAddress = styled.div`
     align-items: flex-start;
     padding: 40px;
     width: 640px;
-    height: 372px;
+    height: 428px;
     background: ${(props) => props.theme['base-card']};
     border-radius: 6px;
 `
@@ -140,9 +140,23 @@ export const PaymentMethod = styled.div<PaymentProps>`
 
     }
 
-    /* &:active {
-        background: ${(props) => props.theme['purple-light']};
-        border: 1px solid ${(props) => props.theme['purple']};
-    } */
+`
+export const ButtonSubmit = styled.button`
+    width: 194px;
+    height: 40px;
+    background: ${(props) => props.theme['purple']};
+    border-radius: 6px;
+    font-family: Roboto;
+    font-style: normal;
+    color: ${(props) => props.theme.white};
+    border: none;
+    cursor: pointer;
+    margin-right: 30px;
+
 `
 
+export const WrapperButtonSubmit = styled.div`
+    display: flex;
+    justify-content: center;
+
+`

@@ -9,6 +9,9 @@ export function Header() {
 
     const { state } = useContext(AppContext);
     const coffeeListLenght = state.cartListProduct.length;
+    const { stateForm } = useContext(AppContext);
+
+    const formAddressLocal = stateForm.listForm
 
     return (
         <HeaderContainer>
@@ -18,8 +21,14 @@ export function Header() {
             
             <Actions>
                 <Location>
-                    <MapPin size={20} color="#8047F8" weight="fill" />  
-                    <p>Porto Alegre, RS</p>
+                    <MapPin size={20} color="#8047F8" weight="fill" /> 
+                    { formAddressLocal.length > 0 ?
+                        formAddressLocal.map(local => (
+                            <p>{local?.localidade}, {local?.uf}</p>
+                        )) 
+                        : <p>Seja bem vindo!</p>
+                    } 
+                   
                 </Location>  
                 <Cart>
                     <QuantityCart>

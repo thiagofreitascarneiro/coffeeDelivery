@@ -18,7 +18,6 @@ export interface ICoffess {
     description: string;
     price: number;
     photo: string;
-    
 }
 
 export function Home() {

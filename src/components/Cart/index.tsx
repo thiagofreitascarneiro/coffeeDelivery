@@ -3,6 +3,7 @@ import { Trash } from "phosphor-react";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../contexts/CyclesContexts";
 import { formatCurrency } from "../../helpers";
+import { Link } from "react-router-dom";
 
 export function Cart() {
 
@@ -66,11 +67,13 @@ export function Cart() {
                 </PriceDelivery>
                 <TotalCart>
                     <p>Total</p>
-                    <p>R$ 33,20</p>
+                    <p>{formatCurrency.format(totalItemsCart + 3.50)}</p>
                 </TotalCart>
-                <ButtonConfirm>
-                    Confirmar Pedido
-                </ButtonConfirm>
+                <Link to={'/delivery'}>
+                    <ButtonConfirm>
+                        Confirmar Pedido
+                    </ButtonConfirm>
+                </Link>
             </WrapperDelivery>
             
         </ContainerCart>

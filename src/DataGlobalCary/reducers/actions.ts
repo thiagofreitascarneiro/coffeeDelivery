@@ -1,4 +1,4 @@
-export const ADD_TO_LIST = "ADD_TO_LIST";
+
 
 export interface Cycle {
   id: number;
@@ -9,12 +9,14 @@ export interface Cycle {
   total: number;
 }
 
+
 export enum ActionTypes {
     ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',
     REMOVE_CYCLE = 'REMOVE_CYCLE',
     ADD_QUANTITY = 'ADD_QUANTITY',
     REMOVE_QUANTITY = 'REMOVE_QUANTITY',
     CHANGE_QUANTITY = 'CHANGE_QUANTITY',
+    
 }
 
 export const addToCart = (item: Cycle) => {
@@ -51,3 +53,4 @@ export const totalPrice = (id: number) => {
     payload: id,
   }
 }
+
